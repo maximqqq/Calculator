@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.ColorModel;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator extends JFrame {
     JTextArea textArea;
@@ -14,7 +16,7 @@ public class Calculator extends JFrame {
     public Calculator()
     {
         this.setTitle("КАЛЬКУЛЯТОР");
-        this.setSize(300,400);
+        this.setSize(300,200);
         this.setVisible(true);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -75,7 +77,7 @@ public class Calculator extends JFrame {
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
 
-        
+
         textArea.setSize(10,10);
         add(panel,BorderLayout.SOUTH);
         panel.add(textArea);
@@ -83,6 +85,7 @@ public class Calculator extends JFrame {
         button1 = new JButton("=");
 
         button1.setSize(10,20);
+        button1.addActionListener(new ButtonListener());
 
         panel.add(button1);
 
@@ -97,10 +100,63 @@ public class Calculator extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+        String temp = null;
+        temp = textArea.getText();
 
+        String[] num;
+        num = temp.split("[-+/*]");
+
+        char[] z;
+        z = temp.toCharArray();
+
+            List<Character> znac = new ArrayList<>();
+
+            for (int i =0; i<z.length; i++)
+            {
+                if(z[i]=='+'||z[i]=='-'||z[i]=='/'||z[i]=='*')
+                {
+                    znac.add(z[i]);
+                }
+
+            }
+
+            double[] numbers = new double[num.length];
+
+            for(int i = 0; i<num.length;i++)
+            {
+                numbers[i]=Double.parseDouble(num[i]);
+            }
+
+            double result = 0;
+
+            result += numbers[0];
+
+            for(int i = 0; i<znac.size();i++)
+            {
+                char buf = znac.get(i);
+                switch (buf)
+                {
+                    case'+':
+                        result += numbers[i+1];
+                        break;
+                    case'-':
+                        result -= numbers[i+1];
+                        break;
+                    case'/':
+                        result /= numbers[i+1];
+                        break;
+                    case'*':
+                        result *= numbers[i+1];
+                        break;
+                }
+            }
+
+            textArea.setText(String.valueOf(result));
 
         }
     }
+
+
 
 
 
