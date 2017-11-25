@@ -1,13 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.image.ColorModel;
 
 public class Calculator extends JFrame {
-
-    private  JButton button_addition;
-    private JTextArea textArea;
-    private JTextField textField;
-    private JLabel label;
+    JTextArea textArea;
+    JButton button1;
 
 
 
@@ -71,33 +71,35 @@ public class Calculator extends JFrame {
         JPanel panel = new JPanel();
        // panel.setSize(50,50);
 
-        JTextArea textArea = new JTextArea(5,20);
+        textArea = new JTextArea(5,20);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
+
+        
         textArea.setSize(10,10);
         add(panel,BorderLayout.SOUTH);
         panel.add(textArea);
 
-        JButton button1 = new JButton("=");
+        button1 = new JButton("=");
 
         button1.setSize(10,20);
 
         panel.add(button1);
 
-///////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
 
 
         this.setVisible(true);
+    }
+
+    public class ButtonListener implements ActionListener
+    {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+
+
+        }
     }
 
 
